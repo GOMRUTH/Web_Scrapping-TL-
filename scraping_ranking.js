@@ -1,3 +1,4 @@
+/*----------------------------------------------------------------*/
 const axios = require('axios');
 const cheerio = require('cheerio');
 const XLSX = require('xlsx');
@@ -35,6 +36,7 @@ async function scrapeTIOBE() {
             }
         });
 
+        console.log("Datos raspados de TIOBE exitosamente.");
         return languages;
     } catch (error) {
         console.error("Error al raspar datos de TIOBE:", error.message);
@@ -57,7 +59,8 @@ async function scrapeTecsify() {
                 languages.push({ Source: 'Tecsify', Language: lang, Rank: rank, Percentage: parseFloat(percentage.replace(',', '.')) });
             }
         });
-        
+
+        console.log("Datos raspados de Tecsify exitosamente.");
         return languages;
     } catch (error) {
         console.error("Error al raspar datos de Tecsify:", error.message);
@@ -95,6 +98,7 @@ async function scrapePYPL() {
     await browser.close();
     
     // Filtrar solo los datos desde Rank 1 hasta Rank 28 y que estén en webLanguages
+    console.log("Datos raspados de PYPL exitosamente.");
     return languages.filter(item => 
         parseInt(item.Rank) >= 1 && parseInt(item.Rank) <= 28 &&
         webLanguages.includes(item.Language)
@@ -165,16 +169,49 @@ function calculateAverages(tiobeData, tecsifyData, pyplData) {
     return averages;
 }
 
-// Función para guardar datos en un archivo Excel
+// Función para aplicar estilos básicos a las celdas
+function applyStyles(sheet) {
+    const range = XLSX.utils.decode_range(sheet['!ref']);
+    
+    for (let R = range.s.r; R <= range.e.r; ++R) {
+        for (let C = range.s.c; C <= range.e.c; ++C) {
+            const cellAddress = { c: C, r: R };
+            const cellRef = XLSX.utils.encode_cell(cellAddress);
+            if (sheet[cellRef]) {
+                // Aplica estilos a cada celda
+                sheet[cellRef].s = {
+                    alignment: {
+                        vertical: "center", // Centrado vertical
+                        horizontal: "center" // Alineación horizontal
+                    },
+                    border: {
+                        top: { style: "thin" },
+                        bottom: { style: "thin" },
+                        left: { style: "thin" },
+                        right: { style: "thin" }
+                    }
+                };
+            }
+        }
+    }
+}
+
+// Función para guardar datos en un archivo Excel con formato
 function saveToExcel(fileName, data, sheetName) {
     if (!data || data.length === 0) {
         console.log(`No hay datos para guardar en ${fileName}`);
         return;
     }
+    
     const wb = XLSX.utils.book_new();
     const sheet = XLSX.utils.json_to_sheet(data);
+
+    // Aplica el formato personalizado a la hoja
+    applyStyles(sheet);
+
     XLSX.utils.book_append_sheet(wb, sheet, sheetName);
     XLSX.writeFile(wb, fileName);
+    console.log(`Archivo guardado exitosamente: ${fileName}`);
 }
 
 // Función principal
@@ -190,7 +227,8 @@ async function main() {
     const averageData = calculateAverages(tiobeData, tecsifyData, pyplData);
     saveToExcel('Average_Data.xlsx', averageData, 'Promedio');
 
-    console.log('Datos guardados en TIOBE_Data.xlsx, Tecsify_Data.xlsx, PYPL_Data.xlsx y Average_Data.xlsx');
+    console.log('Todos los datos han sido guardados.');
 }
 
 main().catch(console.error);
+/*-----------------------------------------------------------------*/
