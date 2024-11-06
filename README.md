@@ -151,4 +151,106 @@ Usa page.evaluate para ejecutar un script en la página que extrae los datos.
 Filtra los lenguajes que están en webLanguages y que tienen un ranking del 1 al 28.*/
 
 ```
+### Función de Calculo de Promedio Total de TIOBE, Tecsify y PYPL
+```javascript
+function calculateAverages(tiobeData, tecsifyData, pyplData) {
+    const averages = [];
+    const allLanguages = {};
 
+    tiobeData.forEach(item => {
+        allLanguages[item.Language] = {
+            TIOBE: item.Percentage,
+            Tecsify: null,
+            PYPL: null,
+            TIOBE_Rank: item.Rank,
+        };
+    });
+
+    tecsifyData.forEach(item => {
+        if (allLanguages[item.Language]) {
+            allLanguages[item.Language].Tecsify = item.Percentage;
+        } else {
+            allLanguages[item.Language] = {
+                TIOBE: null,
+                Tecsify: item.Percentage,
+                PYPL: null,
+                TIOBE_Rank: null,
+            };
+        }
+    });
+
+    pyplData.forEach(item => {
+        if (allLanguages[item.Language]) {
+            allLanguages[item.Language].PYPL = parseFloat(item.Share);
+        } else {
+            allLanguages[item.Language] = {
+                TIOBE: null,
+                Tecsify: null,
+                PYPL: parseFloat(item.Share),
+                TIOBE_Rank: null,
+            };
+        }
+    });
+
+    for (const lang in allLanguages) {
+        const tiobePercentage = allLanguages[lang].TIOBE;
+        const tecsifyPercentage = allLanguages[lang].Tecsify;
+        const pyplPercentage = allLanguages[lang].PYPL;
+
+        let average = null;
+        const percentages = [tiobePercentage, tecsifyPercentage, pyplPercentage].filter(p => p !== null);
+        
+        if (percentages.length > 0) {
+            average = (percentages.reduce((sum, p) => sum + p, 0) / percentages.length).toFixed(2);
+        }
+
+        averages.push({
+            Language: lang,
+            TIOBE: tiobePercentage,
+            Tecsify: tecsifyPercentage,
+            PYPL: pyplPercentage,
+            Average: average,
+        });
+    }
+
+    return averages;
+}
+/*Proceso:
+Crea un objeto allLanguages que consolida las estadísticas de cada lenguaje.
+Calcula el promedio de las estadísticas disponibles y las almacena en averages.*/
+```
+### Función **Guardar Datos en Excel**
+```javascript
+function saveToExcel(fileName, data, sheetName) {
+    if (!data || data.length === 0) {
+        console.log(`No hay datos para guardar en ${fileName}`);
+        return;
+    }
+    
+    const wb = XLSX.utils.book_new();
+    const sheet = XLSX.utils.json_to_sheet(data);
+
+    XLSX.utils.book_append_sheet(wb, sheet, sheetName);
+    XLSX.writeFile(wb, fileName);
+    console.log(`Archivo guardado exitosamente: ${fileName}`);
+}
+```
+### Función Principal
+```javascript
+async function main() {
+    const tiobeData = await scrapeTIOBE();
+    const tecsifyData = await scrapeTecsify();
+    const pyplData = await scrapePYPL();
+
+    saveToExcel('TIOBE_Data.xlsx', tiobeData, 'TIOBE');
+    saveToExcel('Tecsify_Data.xlsx', tecsifyData, 'Tecsify');
+    saveToExcel('PYPL_Data.xlsx', pyplData, 'PYPL');
+
+    const averageData = calculateAverages(tiobeData, tecsifyData, pyplData);
+    saveToExcel('Average_Data.xlsx', averageData, 'Promedio');
+
+    console.log('Todos los datos han sido guardados.');
+}
+
+main().catch(console.error);
+```
