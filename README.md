@@ -1,10 +1,10 @@
-# **Trabajo Practico: Web Scraping** - Ruth Gomez
+# **Trabajo Práctico: Web Scraping** - Ruth Gomez
 
-Este proyecto realiza web scraping para obtener datos sobre la popularidad de los lenguajes de programación en 2024 desde tres fuentes diferentes: TIOBE, Tecsify, y PYPL. Los datos extraídos se procesan y se almacenan en hojas de cálculo de Excel, con gráficos generados automáticamente para facilitar la comparación.
+Este proyecto implementa técnicas de web scraping utilizando **Node.js** para recopilar datos sobre la popularidad de los lenguajes de programación en 2024 a partir de tres fuentes clave: TIOBE, Tecsify y PYPL. La información extraída se organiza y se guarda en archivos Excel, lo que facilita el análisis y la comparación mediante gráficos generados manualmente.
 
 ## Descripción
 
-El objetivo principal del proyecto es demostrar cómo utilizar técnicas de web scraping para extraer información valiosa de la web, procesarla y representarla gráficamente. Utilizamos bibliotecas y herramientas de JavaScript para obtener datos sobre la popularidad de diversos lenguajes de programación y calcular promedios de popularidad a partir de diferentes fuentes.
+El objetivo principal del proyecto es demostrar cómo utilizar técnicas de web scraping para extraer información valiosa de la web, procesarla y representarla gráficamente. Utilizamos bibliotecas y herramientas de JavaScript para obtener datos sobre la popularidad de diversos lenguajes de programación, específicamente aquellos más utilizados en el **desarrollo web**, y calcular promedios de popularidad a partir de diferentes fuentes.
 
 ## **Fuentes Utilizadas**
 Se han elegido tres sitios web que publican rankings de lenguajes de programación:
@@ -13,9 +13,23 @@ Se han elegido tres sitios web que publican rankings de lenguajes de programaci�
 2. **Tecsify** - [Tecsify Blog](https://tecsify.com/blog/top-lenguajes-2024/)
 3. **PYPL** - [PYPL Index](https://pypl.github.io/PYPL.html)
 
-## Motivación
+## Lenguajes de Programación Para el Desarrollo Web
 
-El proyecto busca automatizar la recopilación y el análisis de datos sobre lenguajes de programación, lo que es útil para estudiantes, desarrolladores y empresas que desean conocer las tendencias del sector tecnológico.
+La lista de lenguajes de programación que se consideran clave para el desarrollo web en este proyecto es la siguiente:
+
+- **JavaScript**
+- **Python**
+- **Ruby**
+- **PHP**
+- **Java**
+- **TypeScript**
+- **HTML**
+- **CSS**
+- **Go**
+- **C#**
+- **Swift**
+
+Estos lenguajes son los que se comparan en los distintos índices de popularidad utilizados en el scraping.
 
 ## Tecnologías Utilizadas
 
@@ -34,7 +48,7 @@ const cheerio = require('cheerio'); //Manipular el Dom de las páginas web
 const XLSX = require('xlsx'); //Manejar archivos Excel
 const puppeteer = require('puppeteer'); //Automatizar el navegador
 ```
-### Lista de Lenguajes de Programacion para el Desarrollo Web
+### Lista de Lenguajes de Programación para el Desarrollo Web
 ```javascript
 const webLanguages = [
     "JavaScript",
@@ -151,7 +165,7 @@ Usa page.evaluate para ejecutar un script en la página que extrae los datos.
 Filtra los lenguajes que están en webLanguages y que tienen un ranking del 1 al 28.*/
 
 ```
-### Función de Calculo de Promedio Total de TIOBE, Tecsify y PYPL
+### Función de Cálculo de Promedio Total de TIOBE, Tecsify y PYPL
 ```javascript
 function calculateAverages(tiobeData, tecsifyData, pyplData) {
     const averages = [];
