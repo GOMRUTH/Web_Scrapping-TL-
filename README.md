@@ -75,11 +75,11 @@ async function scrapeTIOBE() {
         console.error("Error al raspar datos de TIOBE:", error.message);
     }
 }
+/* Proceso:
+Hace una solicitud HTTP a la página web de TIOBE.
+Usa cheerio para analizar el contenido HTML y extraer los datos de interés (ranking, lenguaje y porcentaje de uso).
+Filtra los lenguajes que están en webLanguages y los guarda en un array languages.*/
 ```
-- Proceso:
--- Hace una solicitud HTTP a la página web de TIOBE.
--- Usa cheerio para analizar el contenido HTML y extraer los datos de interés (ranking, lenguaje y porcentaje de uso).
--- Filtra los lenguajes que están en webLanguages y los guarda en un array languages.
   
 - **Tecsify**
 ```javascript
