@@ -254,18 +254,21 @@ async function main() {
 
 main().catch(console.error);
 ```
+# Ejecución del Código
+![Imagen de Ejecucion](Imagenes/code_Ejecution.png)
+
 # **Capturas de Excel y Grafico en Power BI**
 ## Tablas Generadas en Excel
 ### Datos de TIOBE
-![Captura de Tabla TIOBE](Imagenes/TIOBE_Data.png))
+![Captura de Tabla TIOBE](Imagenes/TIOBE_Data.png)
 ### Datos de Tecsify
-![Captura de Tabla Tecsify](ruta/a/tu/imagen2.png)
+![Captura de Tabla Tecsify](Imagenes/Tecsify_Data.png)
 ### Datos de PYPL
-![Captura de Tabla PYPL](ruta/a/tu/imagen1.png)
+![Captura de Tabla PYPL](Imagenes/PYPL_Data.png)
 ### Datos de Promedios Total de TIOBE, Tecsify y PYPL
-![Captura de Tabla TIOBE](ruta/a/tu/imagen1.png)
+![Captura de Tabla Average](Imagenes/Average_Data.png)
 
 ## Grafico en Power BI
-![Gráfico en Power BI](ruta/a/tu/imagen3.png)
+![Gráfico en Power BI](Imagenes/Power%20BI%20Desktop%20Promedios%20Scraping.png)
 
 - **Nota o Aclaración**: Aunque los datos se generan automáticamente, el diseño de las tablas y los gráficos se aplicaron manualmente en Excel o en Power BI, debido a problemas de compatibilidad con las versiones de la biblioteca XLSX.
