@@ -34,49 +34,7 @@ const cheerio = require('cheerio');
 const XLSX = require('xlsx');
 const puppeteer = require('puppeteer');```
 
-### Lista de Lneguajes de Programación en Desarrollo Web
-```javascript
-const webLanguages = [
-    "JavaScript",
-    "Python",
-    "Ruby",
-    "PHP",
-    "Java",
-    "TypeScript",
-    "HTML",
-    "CSS",
-    "Go",
-    "C#",
-    "Swift"
-];```
-
-##Funciones de Scraping
-### La Pagina de TIOBE
-####Raspa los datos de la Pagina y se extrae el ranking, el nombre del Lenguaje y el procentaje de popularidad
-```javascript
-async function scrapeTIOBE() {
-    try {
-        const response = await axios.get('https://www.tiobe.com/tiobe-index/');
-        const $ = cheerio.load(response.data);
-        
-        const languages = [];
-        $('#top20 tbody tr').each((index, element) => {
-            const rank = $(element).find('td').eq(0).text().trim();
-            const lang = $(element).find('td').eq(4).text().trim();
-            const percentage = $(element).find('td').eq(5).text().trim().replace('%', '').replace(',', '.');
-            
-            if (webLanguages.includes(lang)) {
-                languages.push({ Source: 'TIOBE', Language: lang, Rank: rank, Percentage: parseFloat(percentage) });
-            }
-        });
-
-        console.log("Datos raspados de TIOBE exitosamente.");
-        return languages;
-    } catch (error) {
-        console.error("Error al raspar datos de TIOBE:", error.message);
-    }
-}```
-
+###Hola
 
 
 
