@@ -32,7 +32,7 @@ El proyecto busca automatizar la recopilación y el análisis de datos sobre len
 const axios = require('axios');
 const cheerio = require('cheerio');
 const XLSX = require('xlsx');
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer');´´´
 
 ### Lista de Lneguajes de Programación en Desarrollo Web
 ```javascript
