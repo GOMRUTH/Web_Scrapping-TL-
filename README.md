@@ -1,4 +1,4 @@
-# Trabajo Practico: Web Scraping - Ruth Gomez
+# **Trabajo Practico: Web Scraping** - Ruth Gomez
 
 Este proyecto realiza web scraping para obtener datos sobre la popularidad de los lenguajes de programación en 2024 desde tres fuentes diferentes: TIOBE, Tecsify, y PYPL. Los datos extraídos se procesan y se almacenan en hojas de cálculo de Excel, con gráficos generados automáticamente para facilitar la comparación.
 
@@ -6,7 +6,7 @@ Este proyecto realiza web scraping para obtener datos sobre la popularidad de lo
 
 El objetivo principal del proyecto es demostrar cómo utilizar técnicas de web scraping para extraer información valiosa de la web, procesarla y representarla gráficamente. Utilizamos bibliotecas y herramientas de JavaScript para obtener datos sobre la popularidad de diversos lenguajes de programación y calcular promedios de popularidad a partir de diferentes fuentes.
 
-## Fuentes Utilizadas
+## **Fuentes Utilizadas**
 Se han elegido tres sitios web que publican rankings de lenguajes de programación:
 
 1. **TIOBE** - [TIOBE Index](https://www.tiobe.com/tiobe-index/)
@@ -51,7 +51,7 @@ const webLanguages = [
 ];
 ```
 ### Funciones de Scraping
-*Tiobe
+- **Tiobe**
 ```javascript
 async function scrapeTIOBE() {
     try {
@@ -76,7 +76,7 @@ async function scrapeTIOBE() {
     }
 }
 ```
-*Tecsify
+- **Tecsify**
 ```javascript
 async function scrapeTecsify() {
     try {
@@ -101,7 +101,7 @@ async function scrapeTecsify() {
     }
 }
 ```
-*PYPL
+- **PYPL**
 ```javascript
 async function scrapePYPL() {
     const browser = await puppeteer.launch();
