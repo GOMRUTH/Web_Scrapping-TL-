@@ -1,10 +1,17 @@
-# Trabajo Practico: Web Scraping de Lenguajes de Programación Populares - Ruth Gomez
+# Trabajo Practico: Web Scraping - Ruth Gomez
 
 Este proyecto realiza web scraping para obtener datos sobre la popularidad de los lenguajes de programación en 2024 desde tres fuentes diferentes: TIOBE, Tecsify, y PYPL. Los datos extraídos se procesan y se almacenan en hojas de cálculo de Excel, con gráficos generados automáticamente para facilitar la comparación.
 
 ## Descripción
 
 El objetivo principal del proyecto es demostrar cómo utilizar técnicas de web scraping para extraer información valiosa de la web, procesarla y representarla gráficamente. Utilizamos bibliotecas y herramientas de JavaScript para obtener datos sobre la popularidad de diversos lenguajes de programación y calcular promedios de popularidad a partir de diferentes fuentes.
+
+## Fuentes Utilizadas
+Se han elegido tres sitios web que publican rankings de lenguajes de programación:
+
+1. **TIOBE** - [TIOBE Index](https://www.tiobe.com/tiobe-index/)
+2. **Tecsify** - [Tecsify Blog](https://tecsify.com/blog/top-lenguajes-2024/)
+3. **PYPL** - [PYPL Index](https://pypl.github.io/PYPL.html)
 
 ## Motivación
 
@@ -19,21 +26,59 @@ El proyecto busca automatizar la recopilación y el análisis de datos sobre len
 - **excel4node**: Biblioteca para generar y manipular archivos de Excel, incluyendo gráficos y tablas.
 - **XLSX**: Módulo utilizado para trabajar con archivos de Excel y exportar datos.
 
-## Proceso del Proyecto
+## Partes del Código
+### Librerías Importadas
+```javascript
+const axios = require('axios');
+const cheerio = require('cheerio');
+const XLSX = require('xlsx');
+const puppeteer = require('puppeteer');
 
-1. **Selección de Tecnologías**: Se utilizaron axios y cheerio para el scraping de sitios con contenido HTML estático, y puppeteer para manejar contenido dinámico.
-2. **Análisis de la Estructura HTML**: Se inspeccionaron las estructuras HTML de los sitios web TIOBE, Tecsify, y PYPL para identificar las secciones de interés, como las tablas de datos.
-3. **Extracción de Datos**:
-   - **TIOBE**: Se extrajo el ranking y el porcentaje de popularidad de los lenguajes de programación.
-   - **Tecsify**: Se obtuvieron datos similares, ajustando el scraping a su estructura específica.
-   - **PYPL**: Se utilizó puppeteer para interactuar con la página y extraer datos de la tabla de rankings.
-4. **Procesamiento y Cálculo de Promedios**: Se calcularon promedios de popularidad para los lenguajes de programación que aparecen en las tres fuentes.
-5. **Generación de Archivos Excel y Gráficos**: Se crearon hojas de cálculo con los datos y gráficos de barras que muestran las diferencias de popularidad entre los lenguajes.
+### Lista de Lneguajes de Programación en Desarrollo Web
+```javascript
+const webLanguages = [
+    "JavaScript",
+    "Python",
+    "Ruby",
+    "PHP",
+    "Java",
+    "TypeScript",
+    "HTML",
+    "CSS",
+    "Go",
+    "C#",
+    "Swift"
+];
 
-## Instrucciones para Ejecutar
+##Funciones de Scraping
+### La Pagina de TIOBE
+####Raspa los datos de la Pagina y se extrae el ranking, el nombre del Lenguaje y el procentaje de popularidad
+```javascript
+async function scrapeTIOBE() {
+    try {
+        const response = await axios.get('https://www.tiobe.com/tiobe-index/');
+        const $ = cheerio.load(response.data);
+        
+        const languages = [];
+        $('#top20 tbody tr').each((index, element) => {
+            const rank = $(element).find('td').eq(0).text().trim();
+            const lang = $(element).find('td').eq(4).text().trim();
+            const percentage = $(element).find('td').eq(5).text().trim().replace('%', '').replace(',', '.');
+            
+            if (webLanguages.includes(lang)) {
+                languages.push({ Source: 'TIOBE', Language: lang, Rank: rank, Percentage: parseFloat(percentage) });
+            }
+        });
 
-### Prerrequisitos
+        console.log("Datos raspados de TIOBE exitosamente.");
+        return languages;
+    } catch (error) {
+        console.error("Error al raspar datos de TIOBE:", error.message);
+    }
+}
 
-Asegúrar de tener instalado Node.js en tu máquina.
+
+
+
 
 
