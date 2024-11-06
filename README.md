@@ -105,6 +105,7 @@ async function scrapeTecsify() {
         console.error("Error al raspar datos de Tecsify:", error.message);
     }
 }
+/*Proceso: Similar a scrapeTIOBE, pero analiza una estructura HTML diferente.*/
 ```
 - **PYPL**
 ```javascript
@@ -144,5 +145,10 @@ async function scrapePYPL() {
         webLanguages.includes(item.Language)
     );
 }
+/*Proceso:
+Lanza un navegador Chromium con puppeteer y navega a la página de PYPL.
+Usa page.evaluate para ejecutar un script en la página que extrae los datos.
+Filtra los lenguajes que están en webLanguages y que tienen un ranking del 1 al 28.*/
+
 ```
 
