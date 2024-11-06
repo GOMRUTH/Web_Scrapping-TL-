@@ -257,7 +257,7 @@ main().catch(console.error);
 # **Capturas de Excel y Grafico en Power BI**
 ## Tablas Generadas en Excel
 ### Datos de TIOBE
-![Captura de Tabla TIOBE](Web_Scrapping-TL-/tree/main/Imagenes)
+![Captura de Tabla TIOBE](Imagenes/TIOBE_Data.png))
 ### Datos de Tecsify
 ![Captura de Tabla Tecsify](ruta/a/tu/imagen2.png)
 ### Datos de PYPL
