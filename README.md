@@ -37,7 +37,6 @@ Estos lenguajes son los que se comparan en los distintos índices de popularidad
 - **axios**: Biblioteca para realizar solicitudes HTTP y obtener el contenido de las páginas web.
 - **cheerio**: Librería que permite analizar y manipular el contenido HTML, simulando el funcionamiento de jQuery.
 - **puppeteer**: Herramienta para automatizar la navegación web y realizar scraping en sitios que requieren interacción con JavaScript.
-- **excel4node**: Biblioteca para generar y manipular archivos de Excel, incluyendo gráficos y tablas.
 - **XLSX**: Módulo utilizado para trabajar con archivos de Excel y exportar datos.
 
 ## Partes del Código
