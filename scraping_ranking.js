@@ -169,34 +169,6 @@ function calculateAverages(tiobeData, tecsifyData, pyplData) {
     return averages;
 }
 
-// Función para aplicar estilos básicos a las celdas
-function applyStyles(sheet) {
-    const range = XLSX.utils.decode_range(sheet['!ref']);
-    
-    for (let R = range.s.r; R <= range.e.r; ++R) {
-        for (let C = range.s.c; C <= range.e.c; ++C) {
-            const cellAddress = { c: C, r: R };
-            const cellRef = XLSX.utils.encode_cell(cellAddress);
-            if (sheet[cellRef]) {
-                // Aplica estilos a cada celda
-                sheet[cellRef].s = {
-                    alignment: {
-                        vertical: "center", // Centrado vertical
-                        horizontal: "center" // Alineación horizontal
-                    },
-                    border: {
-                        top: { style: "thin" },
-                        bottom: { style: "thin" },
-                        left: { style: "thin" },
-                        right: { style: "thin" }
-                    }
-                };
-            }
-        }
-    }
-}
-
-// Función para guardar datos en un archivo Excel con formato
 function saveToExcel(fileName, data, sheetName) {
     if (!data || data.length === 0) {
         console.log(`No hay datos para guardar en ${fileName}`);
@@ -205,9 +177,6 @@ function saveToExcel(fileName, data, sheetName) {
     
     const wb = XLSX.utils.book_new();
     const sheet = XLSX.utils.json_to_sheet(data);
-
-    // Aplica el formato personalizado a la hoja
-    applyStyles(sheet);
 
     XLSX.utils.book_append_sheet(wb, sheet, sheetName);
     XLSX.writeFile(wb, fileName);
